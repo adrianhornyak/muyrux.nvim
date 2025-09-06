@@ -8,8 +8,9 @@ if not cb_status then
 	vim.notify("Colorbuddy not found!", vim.log.levels.ERROR)
 	return
 end
-
-local Color, colors, Group, groups, styles = colorbuddy.setup()
+local colorbuddy = require("colorbuddy.init")
+local Color = colorbuddy.Color
+local colors = colorbuddy.colors
 
 -- ==========================
 -- Палитры
