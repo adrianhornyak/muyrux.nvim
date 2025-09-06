@@ -1,4 +1,9 @@
-local Color, colors, Group, groups, styles = require("colorbuddy.init").setup()
+local colorbuddy = require("colorbuddy.init")
+local Color = colorbuddy.Color
+local colors = colorbuddy.colors
+local Group = colorbuddy.Group
+local groups = colorbuddy.groups
+local styles = colorbuddy.styles
 local M = {}
 M.transparent = false
 
