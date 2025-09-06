@@ -25,7 +25,7 @@ local palettes = {
 -- ==========================
 local theme = {}
 theme.current = vim.g.muyrux_theme or "dark" -- по умолчанию светлая
-theme.transparent = vim.g.muyrux_transparent_bg or nil -- по умолчанию непрозрачная
+theme.transparent = vim.g.muyrux_transparent_bg or "NONE" -- по умолчанию непрозрачная
 
 function theme.load(name, transparent)
 	local pal = palettes[name]
@@ -83,6 +83,6 @@ end, {})
 -- ==========================
 -- Автозагрузка темы при старте
 -- ==========================
-theme.load(theme.current, "NONE")
+theme.load(theme.current, theme.transparent)
 
 return theme

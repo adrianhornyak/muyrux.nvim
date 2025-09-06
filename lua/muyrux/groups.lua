@@ -6,7 +6,7 @@ local s = colorbuddy.styles
 local M = {}
 
 function M.apply_groups(c, transparent)
-	local bg = transparent and nil or c.base
+	local bg = transparent and "NONE" or c.base
 
 	-- Custom groups
 	Group.new("Noise", c.pink, bg, s.none)
