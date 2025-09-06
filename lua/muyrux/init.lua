@@ -1,13 +1,11 @@
 local Color, colors, Group, groups, styles = require("colorbuddy.init").setup()
 local M = {}
-
--- Флаг прозрачного фона
 M.transparent = false
 
 local function apply_groups(c)
 	local bg = M.transparent and "NONE" or c.base
 
-	-- Editor Basics
+	-- BASIC EDITOR GROUPS
 	Group.new("Normal", c.black, bg)
 	Group.new("Comment", c.dark, nil, styles.none)
 	Group.new("NonText", c.light_grey, nil)
@@ -28,24 +26,6 @@ local function apply_groups(c)
 	Group.new("Added", groups.Normal, c.green)
 	Group.new("Changed", groups.Normal, c.blue_dark)
 	Group.new("Removed", groups.Normal, c.red_light)
-
-	-- Search
-	Group.new("MatchParen", groups.Normal, nil, styles.underline)
-	Group.new("CurSearch", c.pink, nil, styles.underline)
-	Group.new("IncSearch", c.pink)
-	Group.new("Search", c.pink)
-
-	-- Popup menus
-	Group.new("Pmenu", c.darker, bg)
-	Group.new("PmenuSel", c.grey, bg)
-	Group.new("PmenuThumb", c.brown)
-	Group.new("WildMenu", c.pink, bg)
-
-	-- Status/Visual
-	Group.new("StatusLine", nil, bg)
-	Group.new("StatusLineNC", c.black, bg)
-	Group.new("Visual", groups.Normal, c.light_grey)
-	Group.new("VisualNOS", groups.Normal, c.light_grey)
 
 	-- Spell
 	Group.new("SpellBad", c.red, nil, styles.undercurl)
@@ -101,7 +81,7 @@ local function apply_groups(c)
 	Group.link("diffadded", groups.Added)
 	Group.link("diffremoved", groups.Removed)
 
-	-- Treesitter (пример)
+	-- Treesitter
 	Group.link("@type.builtin", groups.User3)
 	Group.link("@constant.builtin", groups.User1)
 	Group.link("@constructor", groups.Special)
@@ -115,6 +95,7 @@ local function apply_groups(c)
 	Group.link("@variable.builtin", groups.String)
 end
 
+-- Загрузка темы
 function M.load(theme, transparent)
 	M.transparent = transparent or false
 	local palette
@@ -128,6 +109,7 @@ function M.load(theme, transparent)
 	apply_groups(palette)
 end
 
+-- Переключение светлой/тёмной темы
 function M.toggle()
 	if vim.o.background == "dark" then
 		vim.o.background = "light"
@@ -138,9 +120,19 @@ function M.toggle()
 	end
 end
 
+-- Включение/выключение прозрачного фона
 function M.toggle_transparent()
 	M.transparent = not M.transparent
 	M.load(vim.o.background, M.transparent)
 end
+
+-- Создаём команды для Neovim
+vim.api.nvim_create_user_command("MuyruxToggleTheme", function()
+	M.toggle()
+end, {})
+
+vim.api.nvim_create_user_command("MuyruxToggleTransparent", function()
+	M.toggle_transparent()
+end, {})
 
 return M
