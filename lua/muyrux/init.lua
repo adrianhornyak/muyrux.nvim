@@ -4,43 +4,44 @@ local colors = colorbuddy.colors
 local Group = colorbuddy.Group
 local groups = colorbuddy.groups
 local styles = colorbuddy.styles
+
 local M = {}
 M.transparent = false
 
-local function apply_groups(c)
-	local bg = M.transparent and "NONE" or c.base
+local function apply_groups()
+	local bg = M.transparent and "NONE" or colors.base
 
-	-- BASIC EDITOR GROUPS
-	Group.new("Normal", c.black, bg)
-	Group.new("Comment", c.dark, nil, styles.none)
-	Group.new("NonText", c.light_grey, nil)
-	Group.new("Error", c.red, nil)
-	Group.new("Number", c.blue_dark)
-	Group.new("Special", c.purple)
-	Group.new("String", c.green_deep)
-	Group.new("Title", c.blue)
-	Group.new("Todo", c.pink)
-	Group.new("Warning", c.orange)
+	-- Basic editor groups
+	Group.new("Normal", colors.black, bg)
+	Group.new("Comment", colors.dark, nil, styles.none)
+	Group.new("NonText", colors.light_grey)
+	Group.new("Error", colors.red)
+	Group.new("Number", colors.blue_dark)
+	Group.new("Special", colors.purple)
+	Group.new("String", colors.green_deep)
+	Group.new("Title", colors.blue)
+	Group.new("Todo", colors.pink)
+	Group.new("Warning", colors.orange)
 
 	-- User groups
-	Group.new("User1", c.pink)
-	Group.new("User2", c.blue)
-	Group.new("User3", c.pink)
+	Group.new("User1", colors.pink)
+	Group.new("User2", colors.blue)
+	Group.new("User3", colors.pink)
 
 	-- Diff
-	Group.new("Added", groups.Normal, c.green)
-	Group.new("Changed", groups.Normal, c.blue_dark)
-	Group.new("Removed", groups.Normal, c.red_light)
+	Group.new("Added", groups.Normal, colors.green)
+	Group.new("Changed", groups.Normal, colors.blue_dark)
+	Group.new("Removed", groups.Normal, colors.red_light)
 
 	-- Spell
-	Group.new("SpellBad", c.red, nil, styles.undercurl)
-	Group.new("SpellCap", c.orange, nil, styles.undercurl)
-	Group.new("SpellLocal", c.brown, nil, styles.undercurl)
-	Group.new("SpellRare", c.blue, nil, styles.undercurl)
+	Group.new("SpellBad", colors.red, nil, styles.undercurl)
+	Group.new("SpellCap", colors.orange, nil, styles.undercurl)
+	Group.new("SpellLocal", colors.brown, nil, styles.undercurl)
+	Group.new("SpellRare", colors.blue, nil, styles.undercurl)
 
 	-- Diagnostics
-	Group.new("DiagnosticUnderlineError", nil, nil, styles.underline, c.red)
-	Group.new("DiagnosticUnderlineWarn", nil, nil, styles.underline, c.orange)
+	Group.new("DiagnosticUnderlineError", nil, nil, styles.underline, colors.red)
+	Group.new("DiagnosticUnderlineWarn", nil, nil, styles.underline, colors.orange)
 	Group.new("DiagnosticUnderlineHint", nil, nil, styles.underline)
 	Group.new("DiagnosticUnderlineInfo", nil, nil, styles.underline)
 	Group.link("DiagnosticError", groups.Error)
@@ -50,9 +51,9 @@ local function apply_groups(c)
 	Group.link("DiagnosticOk", groups.String)
 
 	-- GitSigns
-	Group.new("GitSignsAdd", c.green_light)
-	Group.new("GitSignsChange", c.orange)
-	Group.new("GitSignsDelete", c.red)
+	Group.new("GitSignsAdd", colors.green_light)
+	Group.new("GitSignsChange", colors.orange)
+	Group.new("GitSignsDelete", colors.red)
 
 	-- NvimTree
 	Group.link("NvimTreeOpenedFolderName", groups.Special)
@@ -103,15 +104,15 @@ end
 -- Загрузка темы
 function M.load(theme, transparent)
 	M.transparent = transparent or false
-	local palette
+
 	if theme == "dark" then
-		palette = require("muyrux.palette_dark")
+		require("muyrux.palette_dark")
 	else
-		palette = require("muyrux.palette_light")
+		require("muyrux.palette_light")
 	end
 
 	vim.g.colors_name = "muyrux"
-	apply_groups(palette)
+	apply_groups()
 end
 
 -- Переключение светлой/тёмной темы
@@ -131,7 +132,7 @@ function M.toggle_transparent()
 	M.load(vim.o.background, M.transparent)
 end
 
--- Создаём команды для Neovim
+-- Команды
 vim.api.nvim_create_user_command("MuyruxToggleTheme", function()
 	M.toggle()
 end, {})
