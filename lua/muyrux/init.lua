@@ -8,30 +8,32 @@ local styles = colorbuddy.styles
 local M = {}
 M.transparent = false
 
+-- 🔹 Применение всех групп
 local function apply_groups()
 	local bg = M.transparent and "NONE" or colors.base
 
-	-- Basic editor groups
+	-- Базовые группы
 	Group.new("Normal", colors.black, bg)
 	Group.new("Comment", colors.dark, nil, styles.none)
 	Group.new("NonText", colors.light_grey)
 	Group.new("Error", colors.red)
-	Group.new("Number", colors.blue_dark)
+	Group.new("Warning", colors.orange)
+	Group.new("Todo", colors.pink)
 	Group.new("Special", colors.purple)
+	Group.new("Number", colors.blue_dark)
 	Group.new("String", colors.green_deep)
 	Group.new("Title", colors.blue)
-	Group.new("Todo", colors.pink)
-	Group.new("Warning", colors.orange)
+	Group.new("Noise", colors.pink)
 
-	-- User groups
+	-- User группы
 	Group.new("User1", colors.pink)
 	Group.new("User2", colors.blue)
 	Group.new("User3", colors.pink)
 
 	-- Diff
 	Group.new("Added", groups.Normal, colors.green)
-	Group.new("Changed", groups.Normal, colors.blue_dark)
 	Group.new("Removed", groups.Normal, colors.red_light)
+	Group.new("Changed", groups.Normal, colors.blue_dark)
 
 	-- Spell
 	Group.new("SpellBad", colors.red, nil, styles.undercurl)
@@ -101,21 +103,19 @@ local function apply_groups()
 	Group.link("@variable.builtin", groups.String)
 end
 
--- Загрузка темы
+-- 🔹 Загрузка темы
 function M.load(theme, transparent)
 	M.transparent = transparent or false
-
 	if theme == "dark" then
 		require("muyrux.palette_dark")
 	else
 		require("muyrux.palette_light")
 	end
-
 	vim.g.colors_name = "muyrux"
 	apply_groups()
 end
 
--- Переключение светлой/тёмной темы
+-- 🔹 Переключение темы
 function M.toggle()
 	if vim.o.background == "dark" then
 		vim.o.background = "light"
@@ -126,17 +126,16 @@ function M.toggle()
 	end
 end
 
--- Включение/выключение прозрачного фона
+-- 🔹 Переключение прозрачности
 function M.toggle_transparent()
 	M.transparent = not M.transparent
 	M.load(vim.o.background, M.transparent)
 end
 
--- Команды
+-- 🔹 Команды
 vim.api.nvim_create_user_command("MuyruxToggleTheme", function()
 	M.toggle()
 end, {})
-
 vim.api.nvim_create_user_command("MuyruxToggleTransparent", function()
 	M.toggle_transparent()
 end, {})
