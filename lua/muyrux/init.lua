@@ -106,24 +106,22 @@ end
 -- 🔹 Загрузка темы
 function M.load(theme, transparent)
 	M.transparent = transparent or false
+
 	if theme == "dark" then
 		require("muyrux.palette_dark")
 	else
 		require("muyrux.palette_light")
 	end
+
 	vim.g.colors_name = "muyrux"
 	apply_groups()
 end
 
 -- 🔹 Переключение темы
 function M.toggle()
-	if vim.o.background == "dark" then
-		vim.o.background = "light"
-		M.load("light", M.transparent)
-	else
-		vim.o.background = "dark"
-		M.load("dark", M.transparent)
-	end
+	local next_theme = vim.o.background == "dark" and "light" or "dark"
+	vim.o.background = next_theme
+	M.load(next_theme, M.transparent)
 end
 
 -- 🔹 Переключение прозрачности
