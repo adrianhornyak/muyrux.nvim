@@ -1,25 +1,27 @@
+local vim = vim
 local M = {}
+local path = vim.fn.stdpath("data") .. "/muyrux_state.json"
 
--- default state
 M.background = vim.o.background
-M.transparent = false
+M.transparent = nil
 
--- сохраняем состояние в файл
 function M.save()
-	local path = vim.fn.stdpath("config") .. "/lua/muyrux/state.lua"
-	local content =
-		string.format("return { background = '%s', transparent = %s }", M.background, tostring(M.transparent))
-	vim.fn.writefile(vim.split(content, "\n"), path)
+	local data = {
+		background = M.background,
+		transparent = M.transparent,
+	}
+	local encoded = vim.fn.json_encode(data)
+	vim.fn.writefile(vim.split(encoded, "\n"), path)
 end
 
--- загружаем состояние
 function M.load()
-	local path = vim.fn.stdpath("config") .. "/lua/muyrux/state.lua"
 	if vim.fn.filereadable(path) == 1 then
-		local ok, data = pcall(dofile, path)
+		local lines = vim.fn.readfile(path)
+		local content = table.concat(lines, "\n")
+		local ok, data = pcall(vim.fn.json_decode, content)
 		if ok and data then
 			M.background = data.background or vim.o.background
-			M.transparent = data.transparent or false
+			M.transparent = data.transparent
 		end
 	end
 	return M.background, M.transparent
