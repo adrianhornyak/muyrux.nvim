@@ -83,6 +83,6 @@ end, {})
 -- ==========================
 -- Автозагрузка темы при старте
 -- ==========================
-theme.load(theme.current, theme.transparent)
+theme.load(theme.current, "NONE")
 
 return theme
