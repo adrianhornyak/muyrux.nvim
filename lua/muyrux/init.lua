@@ -10,7 +10,7 @@ M.transparent = false
 
 -- 🔹 Применение всех групп
 local function apply_groups()
-	local bg = M.transparent and "NONE" or colors.base
+	local bg = M.transparent and nil or colors.base
 
 	-- Базовые группы
 	Group.new("Normal", colors.black, bg)
