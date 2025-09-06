@@ -1,6 +1,5 @@
 local colorbuddy = require("colorbuddy.init")
 local Group = colorbuddy.Group
-local c = colorbuddy.colors
 local g = colorbuddy.groups
 local s = colorbuddy.styles
 
@@ -171,12 +170,6 @@ function M.apply_groups(c, transparent)
 	Group.link("TelescopeBorder", g.Noise)
 	Group.link("TelescopeMatching", g.User1)
 	Group.link("TelescopePromptCounter", g.Noise)
-
-	-- Markdown
-	Group.link("@markup.list.unchecked.markdown", g.Error)
-	Group.link("@markup.list.checked.markdown", g.Number)
-	Group.link("@markup.link.label.markdown_inline", g.Special)
-	Group.link("@markup.link.url.markdown_inline", g.Noise)
 
 	-- Fugitive
 	Group.link("fugitiveUnstagedModifier", g.TypeDef)
