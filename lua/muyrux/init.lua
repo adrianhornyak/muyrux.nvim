@@ -6,11 +6,11 @@ local groups = colorbuddy.groups
 local styles = colorbuddy.styles
 
 local M = {}
-M.transparent = false
+M.transparent = false -- false = обычный фон, nil = прозрачный
 
 -- 🔹 Применение всех групп
 local function apply_groups()
-	local bg = M.transparent and nil or colors.base
+	local bg = M.transparent or colors.base -- nil → прозрачный, false → colors.base
 
 	-- Базовые группы
 	Group.new("Normal", colors.black, bg)
@@ -105,7 +105,7 @@ end
 
 -- 🔹 Загрузка темы
 function M.load(theme, transparent)
-	M.transparent = transparent or false
+	M.transparent = transparent or M.transparent
 
 	if theme == "dark" then
 		require("muyrux.palette_dark")
@@ -126,7 +126,7 @@ end
 
 -- 🔹 Переключение прозрачности
 function M.toggle_transparent()
-	M.transparent = not M.transparent
+	M.transparent = M.transparent and false or nil
 	M.load(vim.o.background, M.transparent)
 end
 
