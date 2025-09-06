@@ -46,7 +46,7 @@ function theme.load(name, transparent)
 
 	-- Загружаем цвета
 	for key, val in pairs(pal) do
-		Color.new(key, val.gui)
+		Color.new(key, val)
 	end
 
 	-- Загружаем группы
