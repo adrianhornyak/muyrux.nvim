@@ -1,26 +1,27 @@
-local Color = require("colorbuddy").Color
+local M = {}
 
--- Тёмная палитра
-Color.new("red_light", "#ff7f7f")
-Color.new("red", "#ff5f5f")
-Color.new("orange", "#ffaf5f")
-Color.new("brown", "#af875f")
-Color.new("brown_deep", "#875f5f")
-Color.new("green_deep", "#1abc9c")
-Color.new("green", "#9ece6a")
-Color.new("green_light", "#b5f4a5")
-Color.new("blue_light", "#89ddff")
-Color.new("blue", "#7dcfff")
-Color.new("blue_dark", "#2ac3de")
-Color.new("pink", "#ff8ecc")
-Color.new("purple", "#bb9af7")
-Color.new("white", "#e0e0e0")
-Color.new("light_grey", "#bcbcbc")
-Color.new("grey", "#949494")
-Color.new("dark", "#444444")
-Color.new("darker", "#222222")
-Color.new("darkest", "#111111")
-Color.new("base", "#1c1c1c")
-Color.new("black", "#000000")
+M.palette = {
+	red_light = "#ff7f7f",
+	red = "#ff4c4c",
+	orange = "#ffb86c",
+	brown = "#b2926f",
+	brown_deep = "#875f5f",
+	green_deep = "#1abc9c",
+	green = "#8fbc8f",
+	green_light = "#9ece6a",
+	blue_light = "#89ddff",
+	blue = "#7dcfff",
+	blue_dark = "#2ac3de",
+	pink = "#ff79c6",
+	purple = "#bb9af7",
+	white = "#e6e6e6",
+	light_grey = "#bcbcbc",
+	grey = "#949494",
+	dark = "#44475a",
+	darker = "#282a36",
+	darkest = "#1c1c1c",
+	base = "#1c1c1c",
+	black = "#000000",
+}
 
-return {}
+return M
