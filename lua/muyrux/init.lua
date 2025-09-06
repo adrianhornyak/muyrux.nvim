@@ -8,6 +8,8 @@ if not cb_status then
 	vim.notify("Colorbuddy not found!", vim.log.levels.ERROR)
 	return
 end
+
+local state = require("muyrux.state")
 -- ==========================
 -- Палитры
 -- ==========================
@@ -20,10 +22,11 @@ local palettes = {
 -- Основной модуль темы
 -- ==========================
 local theme = {}
-theme.current = vim.g.muyrux_theme -- по умолчанию
-theme.transparent = vim.g.muyrux_transparent_bg -- по умолчанию
+local background, transparent = state.load()
+theme.current = background -- по умолчанию
+theme.transparent = transparent -- по умолчанию
 
-function theme.load(name, transparent)
+function theme.load(name, trans)
 	local pal = palettes[name]
 	if not pal then
 		vim.notify("Palette " .. name .. " not found!", vim.log.levels.ERROR)
@@ -41,7 +44,7 @@ function theme.load(name, transparent)
 
 	local colorbuddy = require("colorbuddy.init")
 	local Color = colorbuddy.Color
-	local colors = colorbuddy.colors
+	local c = colorbuddy.colors
 
 	-- Загружаем цвета
 	for key, hex in pairs(pal) do
@@ -50,7 +53,7 @@ function theme.load(name, transparent)
 
 	-- Загружаем группы
 	local groups_module = require("muyrux.groups")
-	groups_module.apply_groups(colors, transparent)
+	groups_module.apply_groups(c, trans)
 end
 
 -- ==========================
@@ -59,6 +62,8 @@ end
 function theme.toggle_theme()
 	theme.current = (theme.current == "light") and "dark" or "light"
 	theme.load(theme.current, theme.transparent)
+	state.background = theme.current
+	state.save()
 end
 
 -- ==========================
@@ -67,6 +72,8 @@ end
 function theme.toggle_transparent()
 	theme.transparent = not theme.transparent
 	theme.load(theme.current, theme.transparent)
+	state.transparent = theme.transparent
+	state.save()
 end
 
 -- ==========================
@@ -83,6 +90,6 @@ end, {})
 -- ==========================
 -- Автозагрузка темы при старте
 -- ==========================
-theme.load(theme.current, theme.transparent)
+theme.load(background, transparent)
 
 return theme
