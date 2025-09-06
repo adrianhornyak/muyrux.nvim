@@ -9,7 +9,6 @@ if not cb_status then
 	return
 end
 
-local state = require("muyrux.state")
 -- ==========================
 -- Палитры
 -- ==========================
@@ -22,9 +21,8 @@ local palettes = {
 -- Основной модуль темы
 -- ==========================
 local theme = {}
-local background, transparent = state.load()
-theme.current = background -- по умолчанию
-theme.transparent = transparent -- по умолчанию
+theme.current = vim.g.bacground -- по умолчанию
+theme.transparent = false -- по умолчанию
 
 function theme.load(name, trans)
 	local pal = palettes[name]
@@ -62,8 +60,6 @@ end
 function theme.toggle_theme()
 	theme.current = (theme.current == "light") and "dark" or "light"
 	theme.load(theme.current, theme.transparent)
-	state.background = theme.current
-	state.save()
 end
 
 -- ==========================
@@ -72,8 +68,6 @@ end
 function theme.toggle_transparent()
 	theme.transparent = not theme.transparent
 	theme.load(theme.current, theme.transparent)
-	state.transparent = theme.transparent
-	state.save()
 end
 
 -- ==========================
@@ -90,6 +84,6 @@ end, {})
 -- ==========================
 -- Автозагрузка темы при старте
 -- ==========================
-theme.load(background, transparent)
+theme.load(theme.current, theme.transparent)
 
 return theme
