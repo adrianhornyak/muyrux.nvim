@@ -89,19 +89,6 @@ function M.apply_groups(c, transparent)
 	Group.link("Type", g.User3)
 	Group.link("TypeDef", g.User3)
 
-	-- Treesitter
-	Group.link("@type.builtin", g.User3)
-	Group.link("@constant.builtin", g.User1)
-	Group.link("@constructor", g.Special)
-	Group.link("@exception.operator", g.Special)
-	Group.link("@function.macro", g.Normal)
-	Group.link("@namespace", g.Normal)
-	Group.link("@punctuation.special", g.Normal)
-	Group.link("@keyword.storage", g.User2)
-	Group.link("@type.qualifier", g.Normal)
-	Group.link("@variable", g.Normal)
-	Group.link("@variable.builtin", g.String)
-
 	-- UI
 	Group.link("ErrorMsg", g.Error)
 	Group.link("ModeMsg", g.Normal)
@@ -127,6 +114,9 @@ function M.apply_groups(c, transparent)
 	Group.link("NvimInternalError", g.Error)
 	Group.link("FloatBorder", g.NonText)
 
+	-- Treesitter
+	require("muyrux.groups.treesitter")
+
 	-- Diagnostics
 	Group.new("DiagnosticUnderlineError", c.none, c.none, s.underline, c.red)
 	Group.new("DiagnosticUnderlineWarn", c.none, c.none, s.underline, c.orange)
@@ -142,43 +132,18 @@ function M.apply_groups(c, transparent)
 	require("muyrux.groups.gitsigs").setup(c, bg)
 
 	-- NvimTree
-	Group.link("NvimTreeOpenedFolderName", g.Special)
-	Group.link("NvimTreeFolderIcon", g.Special)
-	Group.link("NvimTreeFolderName", g.Normal)
-	Group.link("NvimTreeEmptyFolderName", g.Comment)
-	Group.link("NvimTreeGitDirty", g.Warning)
-	Group.link("NvimTreeGitFileDirtyHL", g.Normal)
-	Group.link("NvimTreeGitFolderDirtyHL", g.Normal)
-	Group.link("NvimTreeGitStaged", g.TypeDef)
-	Group.link("NvimTreeGitFileStagedHL", g.Normal)
-	Group.link("NvimTreeGitFolderStagedHL", g.Normal)
-	Group.link("NvimTreeGitMerge", g.Error)
-	Group.link("NvimTreeGitFileMergeHL", g.Normal)
-	Group.link("NvimTreeGitFolderMergeHL", g.Normal)
-	Group.link("NvimTreeGitRenamed", g.Changed)
-	Group.link("NvimTreeGitFileRenamedHL", g.Normal)
-	Group.link("NvimTreeGitFolderRenamedHL", g.Normal)
-	Group.link("NvimTreeGitNew", g.String)
-	Group.link("NvimTreeGitFileNewHL", g.Normal)
-	Group.link("NvimTreeGitFolderNewHL", g.Normal)
-	Group.link("NvimTreeGitDeleted", g.Error)
-	Group.link("NvimTreeGitFileDeletedHL", g.Normal)
-	Group.link("NvimTreeGitFolderDeletedHL", g.Normal)
-	Group.link("NvimTreeGitIgnored", g.Comment)
+	require("muyrux.groups.nvimtree").setup()
 
 	-- Telescope
 	Group.link("TelescopeBorder", g.Noise)
 	Group.link("TelescopeMatching", g.User1)
 	Group.link("TelescopePromptCounter", g.Noise)
 
+	-- Markdown
+	require("muyrux.groups.markdown").setup()
+
 	-- Fugitive
-	Group.link("fugitiveUnstagedModifier", g.TypeDef)
-	Group.link("fugitiveStagedHeading", g.Warning)
-	Group.link("fugitiveUntrackedHeading", g.Macro)
-	Group.link("fugitiveUntrackedSection", g.Noise)
-	Group.link("fugitiveUntrackedModifier", g.Noise)
-	Group.new("diffadded", c.none, c.green, s.none)
-	Group.new("diffremoved", c.none, c.red_light, s.none)
+	require("muyrux.groups.fugitive").setup(c)
 end
 
 return M
