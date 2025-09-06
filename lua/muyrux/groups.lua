@@ -1,12 +1,13 @@
 local colorbuddy = require("colorbuddy.init")
 local Group = colorbuddy.Group
+local Color = colorbuddy.Color
 local g = colorbuddy.groups
 local s = colorbuddy.styles
 
 local M = {}
 
 function M.apply_groups(c, transparent)
-	local bg = transparent and "NONE" or c.base
+	local bg = transparent and Color.new("Transparent", nil) or c.base
 
 	-- Custom groups
 	Group.new("Noise", c.pink, bg, s.none)
