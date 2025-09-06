@@ -21,10 +21,10 @@ local palettes = {
 -- Основной модуль темы
 -- ==========================
 local theme = {}
-theme.current = vim.g.bacground -- по умолчанию
+theme.current = vim.option.background -- по умолчанию
 theme.transparent = false -- по умолчанию
 
-function theme.load(name, trans)
+function theme.load(name, transparent)
 	local pal = palettes[name]
 	if not pal then
 		vim.notify("Palette " .. name .. " not found!", vim.log.levels.ERROR)
@@ -51,7 +51,7 @@ function theme.load(name, trans)
 
 	-- Загружаем группы
 	local groups_module = require("muyrux.groups")
-	groups_module.apply_groups(c, trans)
+	groups_module.apply_groups(c, transparent)
 end
 
 -- ==========================
