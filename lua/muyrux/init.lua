@@ -12,7 +12,6 @@ local colorbuddy = require("colorbuddy.init")
 local Color = colorbuddy.Color
 local colors = colorbuddy.colors
 
-local state = require("src.state")
 -- ==========================
 -- Палитры
 -- ==========================
