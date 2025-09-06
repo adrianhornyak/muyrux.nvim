@@ -3,15 +3,11 @@
 -- ==========================
 
 -- Lazy-load Colorbuddy
-local cb_status, colorbuddy = pcall(require, "colorbuddy.init")
+local cb_status = pcall(require, "colorbuddy.init")
 if not cb_status then
 	vim.notify("Colorbuddy not found!", vim.log.levels.ERROR)
 	return
 end
-local colorbuddy = require("colorbuddy.init")
-local Color = colorbuddy.Color
-local colors = colorbuddy.colors
-
 -- ==========================
 -- Палитры
 -- ==========================
@@ -42,6 +38,9 @@ function theme.load(name, transparent)
 	if vim.fn.exists("syntax_on") then
 		vim.cmd("syntax reset")
 	end
+
+	local colorbuddy = require("colorbuddy.init")
+	local Color = colorbuddy.Color
 
 	-- Загружаем цвета
 	for key, hex in pairs(pal) do
