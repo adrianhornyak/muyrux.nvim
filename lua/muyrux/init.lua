@@ -21,7 +21,7 @@ local palettes = {
 -- ==========================
 local theme = {}
 theme.current = vim.g.muyrux_theme -- по умолчанию
-theme.transparent = vim.g.muyrux_transparent_bg -- по умолчанию
+theme.transparent = true -- по умолчанию
 
 function theme.load(name, transparent)
 	local pal = palettes[name]
