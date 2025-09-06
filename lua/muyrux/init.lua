@@ -21,7 +21,7 @@ local palettes = {
 -- Основной модуль темы
 -- ==========================
 local theme = {}
-theme.current = vim.opt.background -- по умолчанию
+theme.current = "dark" -- по умолчанию
 theme.transparent = false -- по умолчанию
 
 function theme.load(name, transparent)

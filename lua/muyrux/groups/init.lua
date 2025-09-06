@@ -114,9 +114,6 @@ function M.apply_groups(c, transparent)
 	Group.link("NvimInternalError", g.Error)
 	Group.link("FloatBorder", g.NonText)
 
-	-- Treesitter
-	require("muyrux.groups.treesitter")
-
 	-- Diagnostics
 	Group.new("DiagnosticUnderlineError", c.none, c.none, s.underline, c.red)
 	Group.new("DiagnosticUnderlineWarn", c.none, c.none, s.underline, c.orange)
@@ -128,6 +125,9 @@ function M.apply_groups(c, transparent)
 	Group.link("DiagnosticInfo", g.Comment)
 	Group.link("DiagnosticOk", g.String)
 
+	-- Treesitter
+	require("muyrux.groups.treesitter")
+
 	-- GitSigns
 	require("muyrux.groups.gitsigs").setup(c, bg)
 
@@ -135,9 +135,7 @@ function M.apply_groups(c, transparent)
 	require("muyrux.groups.nvimtree").setup()
 
 	-- Telescope
-	Group.link("TelescopeBorder", g.Noise)
-	Group.link("TelescopeMatching", g.User1)
-	Group.link("TelescopePromptCounter", g.Noise)
+	require("muyrux.groups.telescope").setup()
 
 	-- Markdown
 	require("muyrux.groups.markdown").setup()
