@@ -12,6 +12,7 @@ local colorbuddy = require("colorbuddy.init")
 local Color = colorbuddy.Color
 local colors = colorbuddy.colors
 
+local state = require("src.state")
 -- ==========================
 -- Палитры
 -- ==========================
@@ -24,9 +25,8 @@ local palettes = {
 -- Основной модуль темы
 -- ==========================
 local theme = {}
-
-theme.current = "light" -- по умолчанию светлая
-theme.transparent = nil -- по умолчанию непрозрачная
+theme.current = vim.g.muyrux_theme or "dark" -- по умолчанию светлая
+theme.transparent = vim.g.muyrux_transparent_bg or nil -- по умолчанию непрозрачная
 
 function theme.load(name, transparent)
 	local pal = palettes[name]
@@ -45,8 +45,8 @@ function theme.load(name, transparent)
 	end
 
 	-- Загружаем цвета
-	for key, val in pairs(pal) do
-		Color.new(key, val)
+	for key, hex in pairs(pal) do
+		Color.new(key, hex)
 	end
 
 	-- Загружаем группы
