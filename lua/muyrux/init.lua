@@ -34,11 +34,11 @@ local c = colorbuddy.colors
 -- ==========================
 local theme = {}
 theme.current = "dark" -- по умолчанию
-theme.transparent = false -- по умолчанию
+theme.transparent = true -- по умолчанию
 
 function theme.load(name, transparent)
-	local pal = palettes[name]
-	if not pal then
+	local palallet = palettes[name]
+	if not palallet then
 		vim.notify("Palette " .. name .. " not found!", vim.log.levels.ERROR)
 		return
 	end
@@ -53,8 +53,8 @@ function theme.load(name, transparent)
 	end
 
 	-- Загружаем цвета
-	for key, hex in pairs(pal) do
-		Color.new(key, hex)
+	for key, val in pairs(palallet) do
+		Color.new(key, val)
 	end
 
 	-- Загружаем группы

@@ -1,1 +1,1 @@
-require("muyrux").load("dark", true)
+require("muyrux")
