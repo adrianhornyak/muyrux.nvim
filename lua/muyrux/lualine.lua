@@ -3,7 +3,7 @@ local module = {}
 function module.setup(colors, background)
 	local c = colors
 	local blue = c.blue:to_vim()
-	local green = c.green:to_vim()
+	local green = c.green_light:to_vim()
 	local orange = c.orange:to_vim()
 	local purple = c.purple:to_vim()
 	local red = c.red:to_vim()

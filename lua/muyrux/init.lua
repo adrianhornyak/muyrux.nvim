@@ -33,8 +33,8 @@ local c = colorbuddy.colors
 -- Основной модуль темы
 -- ==========================
 local theme = {}
-theme.current = "dark" -- по умолчанию
-theme.transparent = true -- по умолчанию
+theme.current = vim.g.muyrux_theme_type -- по умолчанию
+theme.transparent = vim.g.muyrux_theme_transparent -- по умолчанию
 
 function theme.load(name, transparent)
 	local palallet = palettes[name]
