@@ -8,8 +8,8 @@ local M = {}
 function M.apply_groups(c, background)
 	local bg = background and c.none or c.base
 	vim.print(">>> COLORS >>>")
-	vim.print(c.blue)
-	vim.print(c.green)
+	vim.print(c.blue.value.hex)
+	vim.print(c.green.value)
 	vim.print("Transparent:", bg)
 	-- Custom groups
 	Group.new("Noise", c.pink, bg, s.none)
