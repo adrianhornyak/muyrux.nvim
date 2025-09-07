@@ -2,8 +2,8 @@ local module = {}
 
 function module.setup(c, bg)
 	vim.print(">>> COLORS >>>")
-	vim.print(c.blue)
-	vim.print(c.green)
+	vim.print(c.blue.hex)
+	vim.print(c.green.hex)
 	vim.print("Transparent:", bg)
 	return {
 		normal = {
