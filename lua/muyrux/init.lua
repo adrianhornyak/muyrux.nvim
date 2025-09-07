@@ -9,6 +9,13 @@ if not cb_status then
 	return
 end
 
+-- Lazy-load Lualine
+local ll_status = pcall(require, "lualine")
+if not ll_status then
+	vim.notify("Lualine not found!", vim.log.levels.ERROR)
+	return
+end
+
 -- ==========================
 -- Палитры
 -- ==========================
@@ -16,6 +23,11 @@ local palettes = {
 	light = require("muyrux.palettes.light"),
 	dark = require("muyrux.palettes.dark"),
 }
+
+local lualine = require("lualine")
+local colorbuddy = require("colorbuddy.init")
+local Color = colorbuddy.Color
+local c = colorbuddy.colors
 
 -- ==========================
 -- Основной модуль темы
@@ -40,10 +52,6 @@ function theme.load(name, transparent)
 		vim.cmd("syntax reset")
 	end
 
-	local colorbuddy = require("colorbuddy.init")
-	local Color = colorbuddy.Color
-	local c = colorbuddy.colors
-
 	-- Загружаем цвета
 	for key, hex in pairs(pal) do
 		Color.new(key, hex)
@@ -52,6 +60,10 @@ function theme.load(name, transparent)
 	-- Загружаем группы
 	local groups_module = require("muyrux.groups")
 	groups_module.apply_groups(c, transparent)
+
+	local lualine_theme = require("muyrux.groups.lualine").setup(c, transparent)
+
+	lualine.setup({ options = { theme = lualine_theme } })
 end
 
 -- ==========================
