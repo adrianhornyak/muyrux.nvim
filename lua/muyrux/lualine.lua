@@ -9,7 +9,7 @@ function module.setup(colors, background)
 	local red = c.red:to_vim()
 	local black = c.black:to_vim()
 	local base = c.base:to_vim()
-	local bg = background:to_vim()
+	local bg = background
 
 	return {
 		normal = {
