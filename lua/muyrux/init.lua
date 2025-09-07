@@ -61,7 +61,7 @@ function theme.load(name, transparent)
 	local groups_module = require("muyrux.groups")
 	groups_module.apply_groups(c, transparent)
 
-	local lualine_theme = require("muyrux.groups.lualine").setup(c, "")
+	local lualine_theme = require("muyrux.lualine").setup(c, "")
 
 	lualine.setup({ options = { theme = lualine_theme } })
 end
