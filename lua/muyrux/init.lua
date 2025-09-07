@@ -36,6 +36,11 @@ local theme = {}
 theme.current = vim.g.muyrux_theme_type -- по умолчанию
 theme.transparent = vim.g.muyrux_theme_transparent -- по умолчанию
 
+function theme.colors()
+	local palallet = palettes[theme.current]
+	return palallet
+end
+
 function theme.load(name, transparent)
 	local palallet = palettes[name]
 	if not palallet then
