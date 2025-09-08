@@ -113,7 +113,9 @@ function M.apply_groups(c, background)
 	Group.link("TabLineSel", g.Special)
 	Group.link("NvimInternalError", g.Error)
 	Group.link("FloatBorder", g.NonText)
-	Group.link("BufferLineFill ", c.none, bg, s.none)
+
+	Group.new("BufferLineFill ", c.none, bg, s.none)
+
 	-- Diagnostics
 	Group.new("DiagnosticUnderlineError", c.none, c.none, s.underline, c.red)
 	Group.new("DiagnosticUnderlineWarn", c.none, c.none, s.underline, c.orange)
